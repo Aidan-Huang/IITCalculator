@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TaxSheetController : ZenPushViewController
+@interface TaxSheetController : UITableViewController
 
 @end

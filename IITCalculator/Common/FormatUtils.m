@@ -8,70 +8,40 @@
 
 #import "FormatUtils.h"
 
-@interface FormatUtils ()
-
-@property (nonatomic, strong) NSNumberFormatter *numFormatter;
-
-@end
-
 @implementation FormatUtils
 
-+ (FormatUtils *)shared {
-    static dispatch_once_t once;
-    static FormatUtils *shared;
-    dispatch_once(&once, ^ {
-        shared = [[FormatUtils alloc] init];
-    });
-    
-    return shared;
-}
-
-- (NSNumberFormatter *)numFormatter {
-    if (_numFormatter == nil) {
-        _numFormatter = [[NSNumberFormatter alloc] init];
-    }
-    
-    return _numFormatter;
-}
-
 + (NSString *)formatCurrency:(double)num {
-    return [[FormatUtils shared] formatFromNumber:num formatterStyle:NSNumberFormatterCurrencyStyle];
-}
-
-+ (NSString *)formatPercent:(double)num {
-    return [[FormatUtils shared] formatFromNumber:num formatterStyle:NSNumberFormatterPercentStyle];
+    NSNumberFormatter *numFmt = [[NSNumberFormatter alloc] init];
+    [numFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
+//    [numFmt setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
+    [numFmt setCurrencySymbol:@""];
+    
+    return [numFmt stringFromNumber:[NSNumber numberWithDouble:num]];
 }
 
 + (double)formatDoubleWithCurrency:(NSString *)currency {
-    return [[FormatUtils shared] formatFromString:currency formatterStyle:NSNumberFormatterCurrencyStyle];
+    NSNumberFormatter *numFmt = [[NSNumberFormatter alloc] init];
+    [numFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numFmt setCurrencySymbol:@""];
+
+    return [[numFmt numberFromString:currency] doubleValue];
 }
 
-+ (double)formatDoubleWithPercent:(NSString *)percent {    
-    return [[FormatUtils shared] formatFromString:percent formatterStyle:NSNumberFormatterPercentStyle];
-}
-
-- (NSString *)formatFromNumber:(double)num formatterStyle:(NSNumberFormatterStyle)style{
-    if (style == NSNumberFormatterCurrencyStyle) {
-        [self.numFormatter setNumberStyle:style];
-        //    [_numFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
-        [self.numFormatter setCurrencySymbol:@""];
-    } else if (style == NSNumberFormatterPercentStyle) {
-        [self.numFormatter setNumberStyle:style];
-        [self.numFormatter setMinimumFractionDigits:1];
-    }
-        
-    return [self.numFormatter stringFromNumber:[NSNumber numberWithDouble:num]];
-}
-
-- (double)formatFromString:(NSString *)string formatterStyle:(NSNumberFormatterStyle)style{
-    if (style == NSNumberFormatterCurrencyStyle) {
-        [self.numFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-        [self.numFormatter setCurrencySymbol:@""];
-    } else if (style == NSNumberFormatterPercentStyle) {
-        [self.numFormatter setNumberStyle:style];
-    }
++ (NSString *)formatPercent:(double)num {
+    NSNumberFormatter *numFmt = [[NSNumberFormatter alloc] init];
+    [numFmt setNumberStyle:NSNumberFormatterPercentStyle];
+    [numFmt setMinimumFractionDigits:1];
     
-    return [[self.numFormatter numberFromString:string]doubleValue];
+    return [numFmt stringFromNumber:[NSNumber numberWithDouble:num]];
 }
+
++ (double)formatDoubleWithPercent:(NSString *)percent {
+    NSNumberFormatter *numFmt = [[NSNumberFormatter alloc] init];
+    [numFmt setNumberStyle:NSNumberFormatterPercentStyle];
+    
+    return [[numFmt numberFromString:percent]doubleValue];
+}
+
+
 
 @end

@@ -7,14 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Statistics.h"
+#import "IncomeDetail.h"
 
 @interface IITCalculator : NSObject
 
-@property (nonatomic, strong) NSDictionary *config;
+@property (nonatomic, strong) NSMutableDictionary *config;
 
-- (Statistics *)calc:(double)preTaxIncome
-                city:(NSString *)name
-                mode:(int)mode;
+- (IncomeDetail *)calc:(double)preTaxIncome
+                  city:(NSString *)name
+             threshold:(double)threshold
+                   pmu:(double)pmu
+           housingFund:(double)housingFund;
 
 @end

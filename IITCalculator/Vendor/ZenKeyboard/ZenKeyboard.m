@@ -114,8 +114,8 @@
             
             break;
         default:
-            if (MAX_INCOME <= [[NSString stringWithFormat:@"%@%d", _textField.text, key] doubleValue]) {
-                _textField.text = [NSString stringWithFormat:@"%d", MAX_INCOME];
+            if (kMaxNumber <= [[NSString stringWithFormat:@"%@%d", _textField.text, key] doubleValue]) {
+                _textField.text = [NSString stringWithFormat:@"%d", kMaxNumber];
             } else if ([@"0.00" isEqualToString:_textField.text]) {
                 _textField.text = [NSString stringWithFormat:@"%d", key];
             } else if (dot.location == NSNotFound || _textField.text.length <= dot.location + 2) {

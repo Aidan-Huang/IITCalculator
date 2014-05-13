@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutController : ZenPushViewController
+@interface AboutController : UIViewController
 
 // outlets
-@property (strong, nonatomic) UIImageView *imgIcon;
-@property (strong, nonatomic) UILabel *lbVersion;
+@property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
+@property (weak, nonatomic) IBOutlet UILabel *lbVersion;
 
 @end

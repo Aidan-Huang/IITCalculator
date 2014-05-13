@@ -8,14 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-#import "StatisticsController.h"
+#import "IncomeDetailController.h"
 #import "MapController.h"
 #import "SettingsController.h"
 #import "HistoryController.h"
 
 #import "IITCalculator.h"
 
-@interface IITCalculatorController : UIViewController <UITextFieldDelegate, MapControllerDelegate>
+@interface IITCalculatorController : UIViewController <UITextFieldDelegate, MapControllerDelegate, SettingsControllerDelegate> {
 
+    MapController *mapController;
+}
+
+// outlets
+@property (nonatomic, strong) ZenKeyboard *keyboardView;
+@property (nonatomic, strong) ZenTextField *tfPreTaxIncome;
+@property (nonatomic, strong) UIButton *lbCity;
+
+@property (nonatomic, strong) IITCalculator *calculator;
+@property (nonatomic, assign) double pmu;
+@property (nonatomic, assign) double housingFund;
 
 @end

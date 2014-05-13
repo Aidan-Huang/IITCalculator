@@ -22,10 +22,9 @@
 @property (strong, nonatomic) MKMapView *mapView;
 
 @property (nonatomic, weak) id<MapControllerDelegate> delegate;
-
 @property (nonatomic, copy) NSString *currentCity;
-@property (nonatomic, strong) NSDictionary *config;
+@property (nonatomic, strong) NSMutableDictionary *config;
 
-- (id)initWithConfig:(NSDictionary *)config;
+- (id)initWithConfig:(NSMutableDictionary *)config;
 
 @end

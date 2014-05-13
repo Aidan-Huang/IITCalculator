@@ -4,10 +4,25 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Calculator Controller - 个税计算器-->
+        <scene sceneID="ytz-EP-lNv">
+            <objects>
+                <viewController id="529-Rx-Own" customClass="IITCalculatorController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zLn-TE-dsa">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="个税计算器" id="4zF-Sg-dIk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="by4-ul-YWu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="159" y="44"/>
+        </scene>
+        <!--Settings Controller-->
         <scene sceneID="q8b-Ha-Acf">
             <objects>
-                <tableViewController storyboardIdentifier="Tmp" id="yjF-zS-ist" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsController" id="yjF-zS-ist" customClass="SettingsController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Ttt-1f-FYO">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,7 +38,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="五险汇缴基数" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cUJ-b8-kc9">
-                                                    <rect key="frame" x="15" y="11" width="120" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="150" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="STHeitiSC-Medium" family="Heiti SC" pointSize="17"/>
                                                     <color key="textColor" red="0.40784313729999999" green="0.44705882349999998" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,7 +63,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="公积金汇缴基数" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GdW-8p-aUF">
-                                                    <rect key="frame" x="15" y="11" width="120" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="150" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="STHeitiSC-Medium" family="Heiti SC" pointSize="17"/>
                                                     <color key="textColor" red="0.40784313729999999" green="0.44705882349999998" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -88,7 +103,7 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="presentTaxSheetController:" destination="yjF-zS-ist" eventType="touchUpInside" id="gsF-Ts-dto"/>
+                                                        <action selector="presentTaxSheet:" destination="yjF-zS-ist" eventType="touchUpInside" id="DHF-tg-Drs"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -114,7 +129,7 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="sendFeedback:" destination="yjF-zS-ist" eventType="touchUpInside" id="IUi-6I-9ba"/>
+                                                        <action selector="sendFeedback:" destination="yjF-zS-ist" eventType="touchUpInside" id="PBl-b3-Lcz"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -140,7 +155,7 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="presentAboutController:" destination="yjF-zS-ist" eventType="touchUpInside" id="dAR-uT-oi9"/>
+                                                        <action selector="presentAbout:" destination="yjF-zS-ist" eventType="touchUpInside" id="B4N-uj-Iby"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -162,12 +177,50 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLU-7v-4jJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="324" y="-200"/>
+            <point key="canvasLocation" x="618" y="-198"/>
         </scene>
-        <!--Table View Controller-->
+        <!--About Controller-->
+        <scene sceneID="Y3Y-2K-61j">
+            <objects>
+                <viewController storyboardIdentifier="AboutController" id="Ezl-it-Knr" customClass="AboutController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gBh-8p-BQA">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="极简个税计算器" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pup-9a-aW3">
+                                <rect key="frame" x="60" y="197" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="20"/>
+                                <color key="textColor" red="0.40784313729999999" green="0.44705882349999998" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ezx-Ac-Bms">
+                                <rect key="frame" x="60" y="226" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="17"/>
+                                <color key="textColor" red="0.40784313729999999" green="0.44705882349999998" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="tZh-vu-9K0">
+                                <rect key="frame" x="95" y="50" width="131" height="131"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imgIcon" destination="tZh-vu-9K0" id="c2t-Xo-MX0"/>
+                        <outlet property="lbVersion" destination="ezx-Ac-Bms" id="ehp-jm-Hhx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7EF-PS-unb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1054" y="-198"/>
+        </scene>
+        <!--Tax Sheet Controller-->
         <scene sceneID="4oc-Uh-C9G">
             <objects>
-                <tableViewController storyboardIdentifier="Tmp2" id="6p5-1J-xMB" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TaxSheetController" id="6p5-1J-xMB" customClass="TaxSheetController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LnZ-YZ-chV">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -503,7 +556,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4wc-d6-mae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="736" y="-200"/>
+            <point key="canvasLocation" x="618" y="427"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cvf-KU-gQK">
@@ -515,17 +568,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="529-Rx-Own" kind="relationship" relationship="rootViewController" id="MBS-Iv-YoU"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M1G-ae-Cof" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-69" y="-200"/>
+            <point key="canvasLocation" x="68" y="44"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="ZenTextField" superclassName="UITextField">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ZenTextField.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

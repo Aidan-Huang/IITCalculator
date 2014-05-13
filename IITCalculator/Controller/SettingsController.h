@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "SettingsView.h"
  
 @protocol SettingsControllerDelegate <NSObject>
 
@@ -16,8 +14,22 @@
 
 @end
 
-@interface SettingsController : ZenPushViewController <UITextFieldDelegate, MFMailComposeViewControllerDelegate>
+@interface SettingsController : UITableViewController <UITextFieldDelegate, MFMailComposeViewControllerDelegate>
+
+// outlets
+@property (weak, nonatomic) IBOutlet ZenTextField *tfPMU;
+@property (weak, nonatomic) IBOutlet ZenTextField *tfHousingFund;
+@property (nonatomic, strong) ZenKeyboard *keyboardView;
 
 @property (nonatomic, weak) id<SettingsControllerDelegate> delegate;
+
+@property (nonatomic, assign) double pmu;
+@property (nonatomic, assign) double housingFund;
+
+
+- (IBAction)sendFeedback:(id)sender;
+- (IBAction)presentTaxSheet:(id)sender;
+- (IBAction)presentAbout:(id)sender;
+
 
 @end

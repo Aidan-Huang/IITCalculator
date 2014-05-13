@@ -1,14 +1,14 @@
 //
-//  Statistics.m
+//  IncomeDetail.m
 //  IITCalculator
 //
 //  Created by Kevin Nick on 2012-9-24.
 //  Copyright (c) 2012年 com.zen. All rights reserved.
 //
 
-#import "Statistics.h"
+#import "IncomeDetail.h"
 
-@implementation Statistics
+@implementation IncomeDetail
 
 - (id)init {
 		if (self = [super init]) {
@@ -23,11 +23,13 @@
     afterTaxIncome:(double)afterTaxIncome
      taxableAmount:(double)taxableAmount
                tax:(double)tax
+//           pension:(double)pension
+//       medicalCare:(double)medicalCare
+//      unemployment:(double)unemployment
+//  basicHousingFund:(double)basicHousingFund
      pensionAmount:(double)pensionAmount
  medicalCareAmount:(double)medicalCareAmount
 unemploymentAmount:(double)unemploymentAmount
-industrialInjuryAmount:(double)industrialInjuryAmount
-   pregnancyAmount:(double)pregnancyAmount
 basicHousingFundAmount:(double)basicHousingFundAmount
        totalAmount:(double)totalAmount {
 		if (self = [self init]) {
@@ -36,11 +38,13 @@ basicHousingFundAmount:(double)basicHousingFundAmount
         _afterTaxIncome = afterTaxIncome;
         _taxableAmount = taxableAmount;
         _tax = tax;
+//        _pension = pension;
+//        _medicalCare = medicalCare;
+//        _unemployment = unemployment;
+//        _basicHousingFund = basicHousingFund;
         _pensionAmount = pensionAmount;
         _medicalCareAmount = medicalCareAmount;
         _unemploymentAmount = unemploymentAmount;
-        _industrialInjuryAmount = industrialInjuryAmount;
-        _pregnancyAmount = pregnancyAmount;
         _basicHousingFundAmount = basicHousingFundAmount;
         _totalAmount = totalAmount;
     }

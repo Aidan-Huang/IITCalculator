@@ -23,14 +23,25 @@
 
 - (void)initUI {
     self.title = @"税率表";
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
-    
-    UIImage *img = [UIImage imageNamed:@"TaxSheet"];
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-    imgView.image = img;
-    imgView.center = CGPointMake(self.view.center.x, 200);
-    
-    [self.view addSubview:imgView];
+ 
+    UIImage * backgroundImage = [UIImage imageNamed:@"BackgroundTexture"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
 }
+
+#pragma mark - Table view data source
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end

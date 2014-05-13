@@ -7,83 +7,36 @@
 //
 
 #import "IITCalculatorController.h"
-#import "History.h"
 
-
-@interface IITCalculatorController () {
-    
-    AppDelegate *appDelegate;
-    NSManagedObjectContext *managedObjectContext;
-    
-}
-
-// outlets
-@property (nonatomic, strong) ZenKeyboard *keyboardView;
-@property (nonatomic, strong) ZenTextField *tfPreTaxIncome;
-@property (nonatomic, strong) UIButton *lbCity;
-
-// model
-@property (nonatomic, strong) IITCalculator *calculator;
-
-// controller
-@property (nonatomic, strong) MapController *mapController;
+@interface IITCalculatorController ()
 
 @end
 
 @implementation IITCalculatorController {
-    
+
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     [self initUI];
-    [self initCoreData];
     [self initSettings];
-        
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
-        _calculator = [[IITCalculator alloc] init];
-    });
+
+    _calculator = [[IITCalculator alloc]init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(dismissMapView:)
+                                             selector:@selector(dismissSemiModalView:)
                                                  name:kSemiModalDidHideNotification
                                                object:nil];
     
-    //		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [_tfPreTaxIncome becomeFirstResponder];
-}
-
-- (void)initCoreData {
-    appDelegate = [[UIApplication sharedApplication] delegate];
-    managedObjectContext = appDelegate.managedObjectContext;
-}
-
-- (void)initSettings {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths objectAtIndex:0];
-    NSString *plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        _tfPreTaxIncome.text = [FormatUtils formatCurrency:[[map valueForKey:@"preTaxIncome"] doubleValue]];
-        [_lbCity setTitle:[map valueForKey:@"city"] forState:UIControlStateNormal];
-    } else {
-        NSMutableDictionary *map =[[NSMutableDictionary alloc] init];
-        [map setValue:[NSNumber numberWithDouble:0.00] forKey:@"preTaxIncome"];
-        [map setValue:@"" forKey:@"city"];
-        [map writeToFile:plistPath atomically:YES];
-    }
-}
-
-- (void)initUI {
-    self.title = @"个税计算器";
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
+- (void)initUI {    
+    UIImage * backgroundImage = [UIImage imageNamed:@"BackgroundTexture"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     
     UIImage *shadow = [UIImage imageNamed:@"NavigationBarShadow"];
     UIImageView *shadowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -3, 320, 6)];
@@ -107,14 +60,14 @@
     _tfPreTaxIncome = [[ZenTextField alloc] initWithFrame:CGRectMake(100, 5, 200, 60)];
     [_tfPreTaxIncome setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:55.0f]];
     _tfPreTaxIncome.textColor = RGB(104, 114, 121);
-    //    _tfPreTaxIncome.backgroundColor = [UIColor lightGrayColor];
+//    _tfPreTaxIncome.backgroundColor = [UIColor lightGrayColor];
     _tfPreTaxIncome.textAlignment = UITextAlignmentRight;
     _tfPreTaxIncome.adjustsFontSizeToFitWidth = YES;
-    //    _tfPreTaxIncome.clearButtonMode = UITpextFieldViewModeWhileEditing;
-    //    _tfPreTaxIncome.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TotalAmount"]];
-    //    _tfPreTaxIncome.leftViewMode = UITextFieldViewModeAlways;
+//    _tfPreTaxIncome.clearButtonMode = UITpextFieldViewModeWhileEditing;
+//    _tfPreTaxIncome.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TotalAmount"]];
+//    _tfPreTaxIncome.leftViewMode = UITextFieldViewModeAlways;
     _tfPreTaxIncome.delegate = self;
-    //    _tfPreTaxIncome.keyboardType = UIKeyboardTypeDecimalPad;
+//    _tfPreTaxIncome.keyboardType = UIKeyboardTypeDecimalPad;
     
     _keyboardView = [[ZenKeyboard alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
     _keyboardView.textField = _tfPreTaxIncome;
@@ -129,16 +82,16 @@
     
     _lbCity = [UIFactory createLinkButtonWithFrame:CGRectMake(30, 87, 250, 40)];
     [_lbCity setTitle:@"" forState:UIControlStateNormal];
-    //    _lbCity.backgroundColor = [UIColor lightGrayColor];
+//    _lbCity.backgroundColor = [UIColor lightGrayColor];
     [_lbCity.titleLabel setFont:[UIFont fontWithName:HEITI_SC_MEDIUM size:38.0f]];
     _lbCity.titleLabel.shadowColor = [UIColor whiteColor];
     _lbCity.titleLabel.shadowOffset = CGSizeMake(0, 1);
-    //    _lbCity.textAlignment = UITextAlignmentRight;
-    //    _lbCity.textColor = RGB(104, 114, 121);
+//    _lbCity.textAlignment = UITextAlignmentRight;
+//    _lbCity.textColor = RGB(104, 114, 121);
     [_lbCity setTitleColor:RGB(104, 114, 121) forState:UIControlStateNormal];
     _lbCity.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [_lbCity addTarget:self action:@selector(presentMapController) forControlEvents:UIControlEventTouchUpInside];
-    
+
     UIButton *btnChevron = [UIFactory createButtonWithFrame:CGRectMake(290, 98, 14, 21) normalBackground:[UIImage imageNamed:@"Chevron"] highlightedBackground:nil];
     [btnChevron addTarget:self action:@selector(presentMapController) forControlEvents:UIControlEventTouchUpInside];
     
@@ -162,7 +115,7 @@
                                                                             action:nil];
 }
 
-- (UIButton *)createCalcButton {
+- (UIButton *)createCalcButton {    
     UIButton *calcButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *buttonImage = [[UIImage imageNamed:@"CalcButtonNormal"] resizableImageWithCapInsets:UIEdgeInsetsMake(7, 7, 0, 7)];
     UIImage *buttonPressedImage = [[UIImage imageNamed:@"CalcButtonNormalPushed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)];
@@ -185,6 +138,34 @@
     return  calcButton;
 }
 
+- (void)initSettings {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *plistPath = [path stringByAppendingPathComponent:@"user-settings.plist"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        _pmu = [[map valueForKey:@"pmu"] doubleValue];
+        _housingFund = [[map valueForKey:@"housingFund"] doubleValue];
+    } else {        
+        NSMutableDictionary *map =[[NSMutableDictionary alloc]init];
+        [map setValue:[NSNumber numberWithDouble:_pmu] forKey:@"pmu"];
+        [map setValue:[NSNumber numberWithDouble:_housingFund] forKey:@"housingFund"];
+        [map writeToFile:plistPath atomically:YES];
+    }
+    
+    plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        _tfPreTaxIncome.text = [FormatUtils formatCurrency:[[map valueForKey:@"preTaxIncome"] doubleValue]];
+        [_lbCity setTitle:[map valueForKey:@"city"] forState:UIControlStateNormal];
+    } else {
+        NSMutableDictionary *map =[[NSMutableDictionary alloc]init];
+        [map setValue:[NSNumber numberWithDouble:0.00] forKey:@"preTaxIncome"];
+        [map setValue:@"" forKey:@"city"];
+        [map writeToFile:plistPath atomically:YES];
+    }
+}
+
 - (BOOL)existsKey:(NSString *)key inMap:(NSDictionary *)map {
     return [map valueForKeyPath:key] != nil;
 }
@@ -192,46 +173,39 @@
 - (void)calculate {
     [self writeToPlist];
     
-    Statistics *statistics = [_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text mode:0];
-    [self saveHistory:statistics];
+    IncomeDetailController *detailController = nil;
     
-    StatisticsController *controller = [[StatisticsController alloc] initWithIITCalculator:_calculator statistics:statistics];
-        
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)saveHistory:(Statistics *)statistics {
-    History *history = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:managedObjectContext];
-    if (history == nil) {
-        NSLog(@"Failed to create the new entity.");
+    if (_pmu == 0.00 && _housingFund == 0.00) {
+        detailController = [[IncomeDetailController alloc] initWithIncomeDetail:[_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text threshold:kThreshold pmu:-1 housingFund:-1]];
+    } else {
+        detailController = [[IncomeDetailController alloc] initWithIncomeDetail:[_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text threshold:kThreshold pmu:_pmu housingFund:_housingFund]];
     }
     
-    history.preTaxIncome = [NSNumber numberWithDouble:statistics.preTaxIncome];
-    history.afterTaxIncome = [NSNumber numberWithDouble:statistics.afterTaxIncome];
-    history.tax = [NSNumber numberWithDouble:statistics.tax];
-    history.city = statistics.city.name;
-    history.createTime = [NSDate date];
-    
-    [appDelegate saveContext];
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 
-- (void)dismissMapView:(NSNotification *) notification {
+- (void)dismissSemiModalView:(NSNotification *) notification {
     if (notification.object == self) {
         [_tfPreTaxIncome becomeFirstResponder];
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [_tfPreTaxIncome becomeFirstResponder];
+}
+
 - (void)presentMapController {
     [_tfPreTaxIncome resignFirstResponder];
     
-    _mapController = [[MapController alloc] initWithConfig:_calculator.config];
-    _mapController.currentCity = _lbCity.titleLabel.text;
-    _mapController.delegate = self;
-    
-    [self presentSemiViewController:_mapController withOptions:@{
-     KNSemiModalOptionKeys.pushParentBack    : @(YES),
-     KNSemiModalOptionKeys.animationDuration : @(0.5),
-     KNSemiModalOptionKeys.shadowOpacity     : @(0.3),
+    mapController = [[MapController alloc] initWithConfig:_calculator.config];
+    mapController.currentCity = _lbCity.titleLabel.text;
+    mapController.delegate = self;
+
+    [self presentSemiViewController:mapController withOptions:@{
+        KNSemiModalOptionKeys.pushParentBack    : @(YES),
+        KNSemiModalOptionKeys.animationDuration : @(0.5),
+        KNSemiModalOptionKeys.shadowOpacity     : @(0.3),
      }];
 }
 
@@ -241,7 +215,8 @@
 }
 
 - (void)presentSettingsController {
-    SettingsController *controller = [[SettingsController alloc] init];
+    SettingsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsController"];
+    controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -273,41 +248,35 @@
     [_lbCity setTitle:city.name forState:UIControlStateNormal];
 }
 
-- (void)writeToPlist {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths objectAtIndex:0];
-    NSString *plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];
-    NSMutableDictionary *map =[[NSMutableDictionary alloc] init];
-    [map setValue:[NSNumber numberWithDouble:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text]] forKey:@"preTaxIncome"];
-    [map setValue:_lbCity.titleLabel.text forKey:@"city"];
-    [map writeToFile:plistPath atomically:YES];
+#pragma mark - SettingsControllerDelegate
+
+- (void)settingsDidChangeWithPMU:(double)pmu housingFund:(double)housingFund {
+    _pmu = pmu;
+    _housingFund = housingFund;
 }
 
 - (void)viewDidUnload {
-    [self _viewDidUnload];
+    mapController = nil;
+    self.calculator = nil;
+    self.keyboardView = nil;
+    self.lbCity = nil;
+    self.tfPreTaxIncome = nil;
     
     [super viewDidUnload];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
-    if (self.isViewLoaded && !self.view.window) {
-        [self _viewDidUnload];
-    }
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
-- (void)_viewDidUnload {
-    self.mapController = nil;
-    self.calculator = nil;
-    self.keyboardView = nil;
-    self.lbCity = nil;
-    self.tfPreTaxIncome = nil;
+- (void)writeToPlist {    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];
+    NSMutableDictionary *map =[[NSMutableDictionary alloc]init];
+    [map setValue:[NSNumber numberWithDouble:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text]] forKey:@"preTaxIncome"];
+    [map setValue:_lbCity.titleLabel.text forKey:@"city"];
+    [map writeToFile:plistPath atomically:YES];
 }
 
 @end
