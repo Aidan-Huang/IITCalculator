@@ -8,7 +8,19 @@
 
 #import "IITCalculatorController.h"
 
+<<<<<<< HEAD
 @interface IITCalculatorController ()
+=======
+
+@interface IITCalculatorController () {
+    
+    AppDelegate *appDelegate;
+    NSManagedObjectContext *managedObjectContext;
+    
+}
+
+@property (nonatomic, strong) MapController *mapController;
+>>>>>>> parent of 9b2262f... V1.2(1227)
 
 @end
 
@@ -22,8 +34,17 @@
     
     [self initUI];
     [self initSettings];
+<<<<<<< HEAD
 
     _calculator = [[IITCalculator alloc]init];
+=======
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+        [self initCoreData];
+        _calculator = [[IITCalculator alloc] init];
+    });
+>>>>>>> parent of 9b2262f... V1.2(1227)
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dismissSemiModalView:)
@@ -31,10 +52,22 @@
                                                object:nil];
     
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+<<<<<<< HEAD
 
 }
 
 - (void)initUI {    
+=======
+    
+}
+
+- (void)initCoreData {
+    appDelegate = [[UIApplication sharedApplication] delegate];
+    managedObjectContext = appDelegate.managedObjectContext;
+}
+
+- (void)initUI {
+>>>>>>> parent of 9b2262f... V1.2(1227)
     UIImage * backgroundImage = [UIImage imageNamed:@"BackgroundTexture"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     
@@ -97,6 +130,7 @@
     
     UIButton *calcButton = [self createCalcButton];
     
+    
     [self.view addSubview:shadowView];
     [self.view addSubview:separatorLine];
     [self.view addSubview:separatorLine2];
@@ -141,6 +175,7 @@
 - (void)initSettings {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
+<<<<<<< HEAD
     NSString *plistPath = [path stringByAppendingPathComponent:@"user-settings.plist"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
@@ -154,6 +189,9 @@
     }
     
     plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];
+=======
+    NSString *plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];
+>>>>>>> parent of 9b2262f... V1.2(1227)
     if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
         _tfPreTaxIncome.text = [FormatUtils formatCurrency:[[map valueForKey:@"preTaxIncome"] doubleValue]];
@@ -175,10 +213,22 @@
     
     IncomeDetailController *detailController = nil;
     
+<<<<<<< HEAD
     if (_pmu == 0.00 && _housingFund == 0.00) {
         detailController = [[IncomeDetailController alloc] initWithIncomeDetail:[_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text threshold:kThreshold pmu:-1 housingFund:-1]];
     } else {
         detailController = [[IncomeDetailController alloc] initWithIncomeDetail:[_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text threshold:kThreshold pmu:_pmu housingFund:_housingFund]];
+=======
+    StatisticsController *controller = [[StatisticsController alloc] initWithIITCalculator:_calculator statistics:statistics];
+    
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)saveHistory:(Statistics *)statistics {
+    History *history = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:managedObjectContext];
+    if (history == nil) {
+        SysLog(@"Failed to create the new entity.");
+>>>>>>> parent of 9b2262f... V1.2(1227)
     }
     
     [self.navigationController pushViewController:detailController animated:YES];
@@ -248,6 +298,7 @@
     [_lbCity setTitle:city.name forState:UIControlStateNormal];
 }
 
+<<<<<<< HEAD
 #pragma mark - SettingsControllerDelegate
 
 - (void)settingsDidChangeWithPMU:(double)pmu housingFund:(double)housingFund {
@@ -257,6 +308,10 @@
 
 - (void)viewDidUnload {
     mapController = nil;
+=======
+- (void)viewDidUnload {
+    self.mapController = nil;
+>>>>>>> parent of 9b2262f... V1.2(1227)
     self.calculator = nil;
     self.keyboardView = nil;
     self.lbCity = nil;

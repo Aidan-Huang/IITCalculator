@@ -76,6 +76,7 @@
 }
 
 - (void)setMapView {
+<<<<<<< HEAD
     if (_currentCity) {
         City *city = [_config objectForKey:_currentCity];
         CLLocationCoordinate2D centerCoord = {city.coordinate.latitude, city.coordinate.longitude};
@@ -89,6 +90,23 @@
         City *city = [_config objectForKey:key];
         [_mapView addAnnotation:city];
     }
+=======
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+        if (_currentCity) {
+            City *city = [_config objectForKey:_currentCity];
+            CLLocationCoordinate2D centerCoord = {city.coordinate.latitude, city.coordinate.longitude};
+            [_mapView setRegion:MKCoordinateRegionMake(centerCoord, MKCoordinateSpanMake(5, 5)) animated:YES];
+        } else {
+            CLLocationCoordinate2D centerCoord = {GEORGIA_TECH_LATITUDE, GEORGIA_TECH_LONGITUDE};
+            [_mapView setRegion:MKCoordinateRegionMake(centerCoord, MKCoordinateSpanMake(10, 10)) animated:YES];
+        }
+        
+        for (id key in _config) {
+            City *city = [_config objectForKey:key];
+            [_mapView addAnnotation:city];
+        }
+    });
+>>>>>>> parent of 9b2262f... V1.2(1227)
 }
 
 - (void)refreshMapView {

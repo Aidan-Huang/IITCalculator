@@ -116,8 +116,13 @@
     [_scrollView addSubview:_roundLabel];
 }
 
+<<<<<<< HEAD:IITCalculator/Controller/IncomeDetailController.m
 - (void)setPMUUI {
     ZenListView *listView = [[ZenListView alloc] initWithFrame:CGRectMake(0, 165, 0, 230)];
+=======
+- (void)initPMUUI {
+    _listPMU = [[ZenListView alloc] initWithFrame:CGRectMake(0, _pieChart.frame.origin.y + _pieChart.frame.size.height + 10, 320, 390)];
+>>>>>>> parent of 9b2262f... V1.2(1227):IITCalculator/View/StatisticsView.m
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 300, 280, 20)];
     title.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:20.0f];

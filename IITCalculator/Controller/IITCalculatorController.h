@@ -15,9 +15,14 @@
 
 #import "IITCalculator.h"
 
+<<<<<<< HEAD
 @interface IITCalculatorController : UIViewController <UITextFieldDelegate, MapControllerDelegate, SettingsControllerDelegate> {
 
     MapController *mapController;
+=======
+@interface IITCalculatorController : UIViewController <UITextFieldDelegate, MapControllerDelegate> {
+
+>>>>>>> parent of 9b2262f... V1.2(1227)
 }
 
 // outlets
@@ -26,7 +31,10 @@
 @property (nonatomic, strong) UIButton *lbCity;
 
 @property (nonatomic, strong) IITCalculator *calculator;
+<<<<<<< HEAD
 @property (nonatomic, assign) double pmu;
 @property (nonatomic, assign) double housingFund;
+=======
+>>>>>>> parent of 9b2262f... V1.2(1227)
 
 @end

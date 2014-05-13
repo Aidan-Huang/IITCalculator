@@ -18,6 +18,10 @@
 #import "Config.h"
 #import "FormatUtils.h"
 #import "UIFactory.h"
+<<<<<<< HEAD
+=======
+#import "XYPieChart.h"
+>>>>>>> parent of 9b2262f... V1.2(1227)
 #import "ZenKeyboard.h"
 #import "ZenTextField.h"
 #import "UIViewController+KNSemiModal.h"

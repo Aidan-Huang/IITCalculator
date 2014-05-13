@@ -466,7 +466,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         CGFloat interpolatedEndAngle = [presentationLayerEndAngle doubleValue];
 
         CGPathRef path = CGPathCreateArc(_pieCenter, _pieRadius, interpolatedStartAngle, interpolatedEndAngle);
-        [obj setPath:path];
+//        [obj setPath:path];
         CFRelease(path);
         
         {

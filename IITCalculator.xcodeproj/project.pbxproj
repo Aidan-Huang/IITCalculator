@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
+=======
+		0A03C4E81678CF2A00729E09 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A03C4E71678CF2A00729E09 /* XYPieChart.m */; };
+		0A1D6E9516760A60005743D6 /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D6E9416760A60005743D6 /* SDSegmentedControl.m */; };
+		0A1D6E9F16761D05005743D6 /* StatisticsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D6E9E16761D05005743D6 /* StatisticsView.m */; };
+>>>>>>> parent of 9b2262f... V1.2(1227)
 		0A3616AE16292E5D00E0C6E9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3616AD16292E5D00E0C6E9 /* MessageUI.framework */; };
 		0A5329741615C3C6006E3244 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5329731615C3C6006E3244 /* QuartzCore.framework */; };
 		0A8F8DBB16106C68003FC311 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8F8DBA16106C68003FC311 /* UIKit.framework */; };
@@ -105,6 +111,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
+=======
+		0A03C4E61678CF2A00729E09 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
+		0A03C4E71678CF2A00729E09 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		0A1D6E9316760A60005743D6 /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSegmentedControl.h; sourceTree = "<group>"; };
+		0A1D6E9416760A60005743D6 /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
+		0A1D6E9D16761D05005743D6 /* StatisticsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsView.h; sourceTree = "<group>"; };
+		0A1D6E9E16761D05005743D6 /* StatisticsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsView.m; sourceTree = "<group>"; };
+>>>>>>> parent of 9b2262f... V1.2(1227)
 		0A3616AD16292E5D00E0C6E9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0A5329731615C3C6006E3244 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A8F8DB616106C68003FC311 /* IITCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IITCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -360,8 +375,13 @@
 				0AE8B37D16731C1000D7003A /* IITCalculator.h */,
 				0AE8B37E16731C1000D7003A /* IITCalculator.m */,
 				0AE8B37F16731C1000D7003A /* IITCalculator.xcdatamodeld */,
+<<<<<<< HEAD
 				0AE8B38116731C1000D7003A /* IncomeDetail.h */,
 				0AE8B38216731C1000D7003A /* IncomeDetail.m */,
+=======
+				0AE8B38116731C1000D7003A /* Statistics.h */,
+				0AE8B38216731C1000D7003A /* Statistics.m */,
+>>>>>>> parent of 9b2262f... V1.2(1227)
 				0AE8B38316731C1000D7003A /* Range.h */,
 				0AE8B38416731C1000D7003A /* Range.m */,
 				0AE8B38516731C1000D7003A /* TaxRateSheet.h */,
@@ -527,6 +547,11 @@
 		0AE8B3DD16731C1000D7003A /* View */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+=======
+				0A1D6E9D16761D05005743D6 /* StatisticsView.h */,
+				0A1D6E9E16761D05005743D6 /* StatisticsView.m */,
+>>>>>>> parent of 9b2262f... V1.2(1227)
 				0AE8B3DE16731C1000D7003A /* HistoryCell.h */,
 				0AE8B3DF16731C1000D7003A /* HistoryCell.m */,
 				0AE8B3E016731C1000D7003A /* MainStoryboard.storyboard */,
@@ -641,6 +666,10 @@
 				0AE8B42116731C1000D7003A /* iRate.bundle in Resources */,
 				0AE8B42516731C1000D7003A /* SVWebViewController.bundle in Resources */,
 				0AE8B42C16731C1000D7003A /* MainStoryboard.storyboard in Resources */,
+<<<<<<< HEAD
+=======
+				0A9D309E167A1CA70088ED41 /* CellSlideShadow@2x.png in Resources */,
+>>>>>>> parent of 9b2262f... V1.2(1227)
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +712,13 @@
 				0AE8B42916731C1000D7003A /* ZenListView.m in Sources */,
 				0AE8B42A16731C1000D7003A /* ZenTextField.m in Sources */,
 				0AE8B42B16731C1000D7003A /* HistoryCell.m in Sources */,
+<<<<<<< HEAD
+=======
+				0A1D6E9516760A60005743D6 /* SDSegmentedControl.m in Sources */,
+				0A1D6E9F16761D05005743D6 /* StatisticsView.m in Sources */,
+				0A03C4E81678CF2A00729E09 /* XYPieChart.m in Sources */,
+				0A9D3094167A19BD0088ED41 /* UIViewController+KNSemiModal.m in Sources */,
+>>>>>>> parent of 9b2262f... V1.2(1227)
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
